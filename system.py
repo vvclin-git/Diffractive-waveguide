@@ -419,7 +419,8 @@ class K_domain:
             self.elements[self.eid] = element(**options)
 
     def add_sequence(self,sequence):
-        #sequence = [[eid,order],]
+        # sequence = [[eid, order],...]
+        # e.g. [[1, [0, 1]], [2, [0, 1]], [3, [0, 1]]]=> ray tracing through elements 1=>2=>3 at orders 0 and 1
         if len(sequence)<=3:
             self.sequences[self.sid] = sequence
             self.sid += 1
@@ -510,10 +511,12 @@ class System_2D:
             m =  self.lmax/np.sqrt(np.sum(dxdy**2,axis = 1))
             phi = np.arctan2(self.kd.k_out[sid][1,:,2],self.kd.k_out[sid][1,:,1])
 
+            # Circular IC
             if shape.ndim == 1:
                 self.ic = Point(shape[:2]).buffer(shape[2])
                 p0 = np.vstack((shape[2]*np.cos(phi-np.pi/2)+shape[0],shape[2]*np.sin(phi-np.pi/2)+shape[1])).T
                 p1 = np.vstack((shape[2]*np.cos(phi+np.pi/2)+shape[0],shape[2]*np.sin(phi+np.pi/2)+shape[1])).T
+            # Non-Circular IC (Polygon)
             else:
                 self.ic = Polygon(shape)
                 center = np.average(shape[:-1], axis = 0)

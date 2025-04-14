@@ -49,7 +49,7 @@ s3d.add_source(-1,[-38,12,0],
                {'fov':[-20,20,-15,15],
                 'wavelength_list':[0.525],
                 'fov_grid':(3,3),
-                'spatial_grid':(1,1),
+                'spatial_grid':(10,10),
                 'direct':1})
 #Doe1
 s3d.add_element(0.6,Grating,s2d.element_area[1],
