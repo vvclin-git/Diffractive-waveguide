@@ -13,7 +13,10 @@ class Material:
         return np.sqrt(square_n)
     
     def __call__(self,wavelength):
-        return self.sellmeier_equation(*self.coefficient,wavelength)
+        if len(self.coefficient) > 1:
+            return self.sellmeier_equation(*self.coefficient,wavelength)
+        else: # ideal (non-dispersive) material
+            return self.coefficient
 
 class Rays_convert_tool:
     def __init__(self,material = Material('Air',[0,0,0,0,0,0]), 
@@ -125,17 +128,24 @@ class Grating:
                                    -1:[[ 1,-1,0],[ 1,0,0],[ 1,1,0],
                                        [-1,-1,0],[-1,0,0],[-1,1,0]]}):
         ''' 
-        #index
+        # periods
+        'periods': [[period, grating vector]]
+        period: grating pitch (unit µm)
+        grating vector: the angle between grating vector and k_x axis (±180° or 0°-360°)
+
+        # index
         [Material_1,material_2]
         if the ray's direction is positive, the ray propagates from Material_1 to Material_2
         if the ray's direction is negative, the ray propagates from Material_2 to Material_1
-        #diffract_order
+        
+        # diffract_order
         {in-direct:[[out-direct,m_order,n_order]]}
         in-direct:  +z=1, -z=-1
         out-direct: +z=1, -z=-1
         if in-direct = out-direct, diffractive mode is transmission mode
         if in-direct != out-direct, diffractive mode is reflection mode
-        #mode
+        
+        # mode
         All: (default) Calculate all diffraction behavior if it is set in 'diffract_order'.
         T&TIR: Only calculate T-order diffraction behavior unless the R-order diffraction behavior is within the TIR region..
         '''

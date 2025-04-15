@@ -1,0 +1,42 @@
+{
+    "material_selection": {
+        "ambient": "Air",
+        "substrate": "LASF46B"
+    },
+    "system_parameters": {
+        "fov": {
+            "horizontal": 20.0,
+            "vertical": 15.0
+        },
+        "eyebox": {
+            "width": 10.0,
+            "height": 10.0
+        },
+        "eye_relief": 15.0,
+        "wavelength": {
+            "R": 670.0,
+            "G": 525.0,
+            "B": 450.0
+        }
+    },
+    "grating_elements": [
+        {
+            "grating_name": "IC",
+            "pitch": 379.5,
+            "vector_angle": 11.0,
+            "advanced": ""
+        },
+        {
+            "grating_name": "EPE",
+            "pitch": 277.2,
+            "vector_angle": -122.2,
+            "advanced": ""
+        },
+        {
+            "grating_name": "OC",
+            "pitch": 379.5,
+            "vector_angle": 104.6,
+            "advanced": ""
+        }
+    ]
+}
